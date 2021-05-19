@@ -74,8 +74,10 @@ if chk == 'file'
     finish
 endif
 
+" vim-plug installation
 PlugInstall
 
+" Coc.nvim installation
 let g:coc_global_extensions = [
             \'coc-rust-analyzer',
             \'coc-python',
