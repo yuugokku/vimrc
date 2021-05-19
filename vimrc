@@ -66,16 +66,9 @@ nnoremap <Leader>fern :Fern -drawer .<CR>
 
 let g:fern#default_hidden=1
 
-" settings for plugins
+" -----settings for plugins-----
 let setting_filepath = expand('~/.vimsetting')
-
 let chk = getftype(setting_filepath)
-if chk == 'file'
-    finish
-endif
-
-" vim-plug installation
-PlugInstall
 
 " Coc.nvim installation
 let g:coc_global_extensions = [
@@ -86,6 +79,14 @@ let g:coc_global_extensions = [
             \'coc-css',
             \'coc-json'
             \]
+
+if chk == 'file'
+    finish
+endif
+
+" vim-plug installation
+PlugInstall
+
 
 let lines = ["everything setted!"]
 call writefile(lines, setting_filepath)
