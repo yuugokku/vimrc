@@ -3,6 +3,8 @@ scriptencoding utf-8
 nnoremap <Leader>vim :vs ~/.vim/vimrc<CR>
 inoremap jk <ESC>
 
+let is_win32 = has('win32unix') 
+
 " basic settings
 " UTF-8
 set encoding=utf-8
@@ -47,7 +49,11 @@ nnoremap <C-t>l :NextTwitter<CR>
 " configure the number of tweets returned by :FriendsTwitter
 let twitvim_count = 100
 " default browser
-let g:twitvim_browser_cmd = 'firefox'
+if is_win32
+    let g:twitvim_browser_cmd = ''
+else 
+    let g:twitvim_browser_cmd = 'firefox'
+endif
 
 " rust.vim
 let g:rustfmt_autosave = 1
@@ -59,3 +65,26 @@ set helplang=ja,en
 nnoremap <Leader>fern :Fern -drawer .<CR>
 
 let g:fern#default_hidden=1
+
+" settings for plugins
+let setting_filepath = expand('~/.vimsetting')
+
+let chk = getftype(setting_filepath)
+if chk == 'file'
+    finish
+endif
+
+PlugInstall
+
+let g:coc_global_extensions = [
+            \'coc-rust-analyzer',
+            \'coc-python',
+            \'coc-pyright',
+            \'coc-html',
+            \'coc-css',
+            \'coc-json'
+            \]
+
+let lines = ["everything setted!"]
+call writefile(lines, setting_filepath)
+
