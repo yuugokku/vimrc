@@ -73,12 +73,13 @@ let chk = getftype(setting_filepath)
 " Coc.nvim installation
 let g:coc_global_extensions = [
             \'coc-rust-analyzer',
-            \'coc-python',
             \'coc-pyright',
             \'coc-html',
             \'coc-css',
             \'coc-json'
             \]
+let g:coc_node_path = expand('/c/nodejs/node.exe')
+
 
 if chk == 'file'
     finish
@@ -88,6 +89,6 @@ endif
 PlugInstall
 
 
-let lines = ["everything setted!"]
+let lines = ["everything set!"]
 call writefile(lines, setting_filepath)
 
