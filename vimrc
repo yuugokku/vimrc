@@ -29,7 +29,6 @@ call plug#begin('~/.vim/plugins')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
-
 Plug 'lambdalisue/fern.vim'
 Plug 'twitvim/twitvim'
 Plug 'vim-jp/vimdoc-ja'
@@ -87,7 +86,7 @@ endif
 
 " vim-plug installation
 PlugInstall
-
+colo molokai
 
 let lines = ["everything set!"]
 call writefile(lines, setting_filepath)
