@@ -78,7 +78,12 @@ let g:coc_global_extensions = [
             \'coc-css',
             \'coc-json'
             \]
-let g:coc_node_path = expand('/c/nodejs/node.exe')
+
+if is_win32
+    let g:coc_node_path = expand('/c/nodejs/node.exe')
+else
+    let g:coc_node_path = 'node'
+endif
 
 
 if chk == 'file'
