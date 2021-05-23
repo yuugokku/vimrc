@@ -61,15 +61,19 @@ let g:rustfmt_autosave = 1
 set helplang=ja,en
 
 " Fern.vim
-nnoremap <Leader>fern :Fern -drawer .<CR>
+nmap <Leader>fern :Fern -drawer .<CR>
+nmap <Leader>o <Plug>(fern-action-open:vsplit)
+nmap <Leader>n <Plug>(fern-action-new-file)
+nmap <Leader>d <Plug>(fern-action-new-dir)
+nmap <Leader>c <Plug>(fern-action-copy)
+nmap <Leader>m <Plug>(fern-action-move)
+nmap <Leader>d <Plug>(fern-action-trash)
+nmap <Leader>r <Plug>(fern-action-rename)
 
 let g:fern#default_hidden=1
 
-" -----settings for plugins-----
-let setting_filepath = expand('~/.vimsetting')
-let chk = getftype(setting_filepath)
 
-" Coc.nvim installation
+" Coc.nvim installation and settings
 let g:coc_global_extensions = [
             \'coc-rust-analyzer',
             \'coc-pyright',
@@ -84,6 +88,8 @@ else
     let g:coc_node_path = 'node'
 endif
 
+let setting_filepath = expand('~/.vimsetting')
+let chk = getftype(setting_filepath)
 
 if chk == 'file'
     finish
@@ -91,7 +97,6 @@ endif
 
 " vim-plug installation
 PlugInstall
-colo molokai
 
 let lines = ["everything set!"]
 call writefile(lines, setting_filepath)
