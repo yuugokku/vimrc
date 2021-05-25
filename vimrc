@@ -2,6 +2,8 @@ scriptencoding utf-8
 " key mapping
 nnoremap <Leader>vim :vs ~/.vim/vimrc<CR>
 inoremap jk <ESC>
+nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
+nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 
 let is_win32 = has('win32unix') 
 
@@ -62,13 +64,13 @@ set helplang=ja,en
 
 " Fern.vim
 nmap <Leader>fern :Fern -drawer .<CR>
-nmap open <Plug>(fern-action-open:vsplit)
-nmap new <Plug>(fern-action-new-file)
-nmap dir <Plug>(fern-action-new-dir)
-nmap cp <Plug>(fern-action-copy)
-nmap mv <Plug>(fern-action-move)
-nmap del <Plug>(fern-action-trash)
-nmap rm <Plug>(fern-action-rename)
+nmap fopen <Plug>(fern-action-open:vsplit)
+nmap fnew <Plug>(fern-action-new-file)
+nmap fdir <Plug>(fern-action-new-dir)
+nmap fcp <Plug>(fern-action-copy)
+nmap fmv <Plug>(fern-action-move)
+nmap fdel <Plug>(fern-action-trash)
+nmap frn <Plug>(fern-action-rename)
 
 let g:fern#default_hidden=1
 
