@@ -26,6 +26,10 @@ set shiftwidth=4 tabstop=4 expandtab autoindent smartindent
 set nowrap
 set history=2000
 
+augroup filetype_markdown
+    autocmd BufReadPre *.md setlocal wrap
+augroup END
+
 " vim-plug settings
 call plug#begin('~/.vim/plugins')
 
@@ -63,14 +67,25 @@ let g:rustfmt_autosave = 1
 set helplang=ja,en
 
 " Fern.vim
+nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
+
 nmap <Leader>fern :Fern -drawer .<CR>
-nmap fopen <Plug>(fern-action-open:vsplit)
-nmap fnew <Plug>(fern-action-new-file)
-nmap fdir <Plug>(fern-action-new-dir)
-nmap fcp <Plug>(fern-action-copy)
-nmap fmv <Plug>(fern-action-move)
-nmap fdel <Plug>(fern-action-trash)
-nmap frn <Plug>(fern-action-rename)
+
+function! s:set_fernkeys()
+    nmap <buffer>fo <Plug>(fern-action-open:vsplit)
+    nmap <buffer>fn <Plug>(fern-action-new-file)<Plug>(fern-action-reload)
+    nmap <buffer>fd <Plug>(fern-action-new-dir)<Plug>(fern-action-reload)
+    nmap <buffer>fc <Plug>(fern-action-copy)<Plug>(fern-action-reload)
+    nmap <buffer>fm <Plug>(fern-action-move)<Plug>(fern-action-reload)
+    nmap <buffer>fdel <Plug>(fern-action-trash)<Plug>(fern-action-reload)
+    nmap <buffer>frn <Plug>(fern-action-rename)<Plug>(fern-action-reload)
+    nmap <buffer>frl <Plug>(fern-action-reload)
+endfunction
+
+augroup my-fern
+    autocmd! *
+    autocmd FileType fern call s:set_fernkeys()
+augroup END
 
 let g:fern#default_hidden=1
 
