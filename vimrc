@@ -1,18 +1,32 @@
 scriptencoding utf-8
+set encoding=utf-8
+
+" ----------
 " key mapping
+" ----------
 nnoremap <Leader>vim :vs ~/.vim/vimrc<CR>
+" awesome mode changing
 inoremap jk <ESC>
+" surrounding
 nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
+nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
+" nervous at windowing
+nnoremap -h <C-w><
+nnoremap -j <C-w>+
+nnoremap -k <C-w>-
+nnoremap -l <C-w>>
+nnoremap -H 50<C-w><
+nnoremap -J 10<C-w>+
+nnoremap -K 10<C-w>-
+nnoremap -L 50<C-w>>
 
 let is_win32 = has('win32unix') 
 
 " basic settings
-" UTF-8
-set encoding=utf-8
-set nocompatible
 syntax enable
 filetype plugin indent on
+set nocompatible
 set number
 set incsearch
 set hlsearch
@@ -25,12 +39,15 @@ set nowritebackup
 set shiftwidth=4 tabstop=4 expandtab autoindent smartindent
 set nowrap
 set history=2000
+set noswapfile nobackup
 
 augroup filetype_markdown
     autocmd BufReadPre *.md setlocal wrap
 augroup END
 
+" ----------
 " vim-plug settings
+" ----------
 call plug#begin('~/.vim/plugins')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -41,8 +58,10 @@ Plug 'vim-jp/vimdoc-ja'
 
 call plug#end()
 
-" twitvim
+" ----------
 " plugin-related key mappings
+" ----------
+" twitvim
 " Make sure some common comands about twitvim starts with <C-t>
 nnoremap <C-t>tl :FriendsTwitter<CR>
 nnoremap <C-t>p :ProfileTwitter<CR>
@@ -104,17 +123,4 @@ if is_win32
 else
     let g:coc_node_path = 'node'
 endif
-
-let setting_filepath = expand('~/.vimsetting')
-let chk = getftype(setting_filepath)
-
-if chk == 'file'
-    finish
-endif
-
-" vim-plug installation
-PlugInstall
-
-let lines = ["everything set!"]
-call writefile(lines, setting_filepath)
 
