@@ -22,7 +22,7 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
-let s:is_win32 = has('win32unix') 
+let s:is_win32 = has('win32unix')
 
 " basic settings
 syntax enable
