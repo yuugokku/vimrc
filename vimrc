@@ -11,6 +11,7 @@ inoremap jk <ESC>
 nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
+inoremap {<Tab> {<CR>}<Esc>ko
 " nervous at windowing
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
@@ -21,7 +22,7 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
-let is_win32 = has('win32unix') 
+let s:is_win32 = has('win32unix') 
 
 " basic settings
 syntax enable
@@ -62,7 +63,7 @@ call plug#end()
 " plugin-related key mappings
 " ----------
 " twitvim
-" Make sure some common comands about twitvim starts with <C-t>
+" Make sure some common commands about twitvim starts with <C-t>
 nnoremap <C-t>tl :FriendsTwitter<CR>
 nnoremap <C-t>p :ProfileTwitter<CR>
 nnoremap <C-t>n :MentionsTwitter<CR>
@@ -73,7 +74,7 @@ nnoremap <C-t>l :NextTwitter<CR>
 " configure the number of tweets returned by :FriendsTwitter
 let twitvim_count = 100
 " default browser
-if is_win32
+if s:is_win32
     let g:twitvim_browser_cmd = ''
 else 
     let g:twitvim_browser_cmd = 'firefox'
@@ -88,7 +89,7 @@ set helplang=ja,en
 " Fern.vim
 nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
 
-nmap <Leader>fern :Fern -drawer .<CR>
+nmap <Leader>f :Fern -drawer .<CR>
 
 function! s:set_fernkeys()
     nmap <buffer>fo <Plug>(fern-action-open:vsplit)
@@ -99,6 +100,15 @@ function! s:set_fernkeys()
     nmap <buffer>fdel <Plug>(fern-action-trash)<Plug>(fern-action-reload)
     nmap <buffer>frn <Plug>(fern-action-rename)<Plug>(fern-action-reload)
     nmap <buffer>frl <Plug>(fern-action-reload)
+
+    nnoremap <buffer> -h <C-w><
+    nnoremap <buffer> -j <C-w>+
+    nnoremap <buffer> -k <C-w>-
+    nnoremap <buffer> -l <C-w>>
+    nnoremap <buffer> -H 50<C-w><
+    nnoremap <buffer> -J 10<C-w>+
+    nnoremap <buffer> -K 10<C-w>-
+    nnoremap <buffer> -L 50<C-w>>
 endfunction
 
 augroup my-fern
@@ -118,7 +128,7 @@ let g:coc_global_extensions = [
             \'coc-json'
             \]
 
-if is_win32
+if s:is_win32
     let g:coc_node_path = expand('/c/nodejs/node.exe')
 else
     let g:coc_node_path = 'node'
