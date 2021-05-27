@@ -4,7 +4,7 @@ set encoding=utf-8
 " ----------
 " key mapping
 " ----------
-nnoremap <Leader>vim :vs ~/.vim/vimrc<CR>
+nnoremap <Leader>v :vs ~/.vim/vimrc<CR>
 " awesome mode changing
 inoremap jk <ESC>
 " surrounding
