@@ -5,7 +5,7 @@ set encoding=utf-8
 " ----------
 " key mapping
 " ----------
-nnoremap <Leader>v :vs ~/.vim/vimrc<CR>
+nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
 " surrounding
@@ -23,7 +23,8 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
-let s:is_win32 = has('win32unix')
+let s:is_win32_unix = has('win32unix')
+let s:is_win32 = has('win32')
 
 " basic settings
 syntax enable
@@ -32,6 +33,9 @@ set number
 set incsearch
 set hlsearch
 set cursorline
+if s:is_win32
+    set nocursorline
+endif
 set laststatus=2
 set hidden
 set updatetime=400
@@ -128,7 +132,7 @@ let g:coc_global_extensions = [
             \'coc-json'
             \]
 
-if s:is_win32
+if s:is_win32_unix
     let g:coc_node_path = expand('/c/nodejs/node.exe')
 else
     let g:coc_node_path = 'node'
