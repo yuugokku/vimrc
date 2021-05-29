@@ -50,9 +50,27 @@ augroup filetype_markdown
     autocmd BufReadPre *.md setlocal wrap
 augroup END
 
+function! s:get_vimdir() abort
+    if is_win32
+        return '~/vimfiles'
+    else
+        return '~/.vim'
+    endif
+endfunction
+
 " ----------
 " vim-plug settings
 " ----------
+
+" vim-plug automatic installation
+let s:vimplug_dir = expand(s:get_vimdir() . '/autoload')
+let s:vimplug_target = expand(s:vimpug_dir . '/plug.vim')
+
+if !isdirectory(s:vimplug_dir)
+    silent execute '!curl -fLo ' . s:vimplug_target . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugins')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
