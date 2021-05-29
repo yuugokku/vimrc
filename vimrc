@@ -23,6 +23,9 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+
 let g:is_win32_unix = has('win32unix')
 let g:is_win32 = has('win32')
 
@@ -44,6 +47,7 @@ set history=2000
 set noswapfile nobackup noundofile
 set ambiwidth=double
 set termguicolors
+set wildmenu
 
 augroup filetype_markdown
     autocmd BufReadPre *.md setlocal wrap
