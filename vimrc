@@ -13,7 +13,7 @@ nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
 inoremap {<Tab> {<CR>}<Esc>ko
-" nervous at windowing
+" nervous at splitting
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
 nnoremap -k <C-w>-
@@ -50,6 +50,7 @@ set termguicolors
 set wildmenu
 
 augroup filetype_markdown
+    autocmd! *
     autocmd BufReadPre *.md setlocal wrap
 augroup END
 
@@ -73,10 +74,12 @@ if empty(glob(s:vimplug_target))
     silent execute '!curl -fLo ' . s:vimplug_target . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-" I understand what these lines below will do.
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-            \| PlugInstall --sync | source $MYVIMRC
-            \| endif
+augroup vimplug-startup
+    autocmd! *
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+                \| PlugInstall --sync | source $MYVIMRC
+                \| endif
+augroup END
 
 let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
 
