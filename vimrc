@@ -23,8 +23,8 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
-let s:is_win32_unix = has('win32unix')
-let s:is_win32 = has('win32')
+let g:is_win32_unix = has('win32unix')
+let g:is_win32 = has('win32')
 
 " basic settings
 syntax enable
@@ -33,7 +33,7 @@ set number
 set incsearch
 set hlsearch
 set cursorline
-if s:is_win32
+if g:is_win32
     set nocursorline
 endif
 set laststatus=2
@@ -51,7 +51,7 @@ augroup filetype_markdown
 augroup END
 
 function! s:get_vimdir() abort
-    if is_win32
+    if g:is_win32
         return '~/vimfiles'
     else
         return '~/.vim'
@@ -64,14 +64,16 @@ endfunction
 
 " vim-plug automatic installation
 let s:vimplug_dir = expand(s:get_vimdir() . '/autoload')
-let s:vimplug_target = expand(s:vimpug_dir . '/plug.vim')
+let s:vimplug_target = expand(s:vimplug_dir . '/plug.vim')
 
-if !isdirectory(s:vimplug_dir)
+if glob(s:vimplug_target) == ''
     silent execute '!curl -fLo ' . s:vimplug_target . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugins')
+let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
+
+call plug#begin(s:vimplug_repo)
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
@@ -96,7 +98,7 @@ nnoremap <C-t>l :NextTwitter<CR>
 " configure the number of tweets returned by :FriendsTwitter
 let twitvim_count = 100
 " default browser
-if s:is_win32
+if g:is_win32
     let g:twitvim_browser_cmd = ''
 else 
     let g:twitvim_browser_cmd = 'firefox'
@@ -150,7 +152,7 @@ let g:coc_global_extensions = [
             \'coc-json'
             \]
 
-if s:is_win32_unix
+if g:is_win32_unix
     let g:coc_node_path = expand('/c/nodejs/node.exe')
 else
     let g:coc_node_path = 'node'
