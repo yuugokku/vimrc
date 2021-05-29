@@ -33,9 +33,6 @@ set number
 set incsearch
 set hlsearch
 set cursorline
-if g:is_win32
-    set nocursorline
-endif
 set laststatus=2
 set hidden
 set updatetime=400
@@ -45,6 +42,8 @@ set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
 set history=2000
 set noswapfile nobackup noundofile
+set ambiwidth=double
+set termguicolors
 
 augroup filetype_markdown
     autocmd BufReadPre *.md setlocal wrap
