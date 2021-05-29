@@ -44,7 +44,7 @@ set nowritebackup
 set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
 set history=2000
-set noswapfile nobackup
+set noswapfile nobackup noundofile
 
 augroup filetype_markdown
     autocmd BufReadPre *.md setlocal wrap
