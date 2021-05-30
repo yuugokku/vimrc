@@ -23,6 +23,7 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
+
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 
@@ -36,6 +37,9 @@ set number
 set incsearch
 set hlsearch
 set cursorline
+if g:is_win32
+    set nocursorline
+endif
 set laststatus=2
 set hidden
 set updatetime=400
@@ -49,11 +53,27 @@ set ambiwidth=double
 set termguicolors
 set wildmenu
 
+" Auto commands specific to FileType
+
+" markdown
 augroup filetype_markdown
     autocmd! *
     autocmd BufReadPre *.md setlocal wrap
+    autocmd BufReadPre *.md onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
+    autocmd BufReadPre *.md onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
 augroup END
 
+" python
+augroup filetype_python
+    autocmd! *
+    autocmd BufReadPre *.py inoremap """<Tab> """<CR>"""<Esc>ko
+augroup END
+
+" ----------
+" vim-plug settings
+" ----------
+
+" vim setting directory
 function! s:get_vimdir() abort
     if g:is_win32
         return '~/vimfiles'
@@ -61,10 +81,6 @@ function! s:get_vimdir() abort
         return '~/.vim'
     endif
 endfunction
-
-" ----------
-" vim-plug settings
-" ----------
 
 " vim-plug automatic installation
 let s:vimplug_dir = expand(s:get_vimdir() . '/autoload')
@@ -74,13 +90,14 @@ if empty(glob(s:vimplug_target))
     silent execute '!curl -fLo ' . s:vimplug_target . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-augroup vimplug-startup
+augroup vimplug_startup
     autocmd! *
     autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
                 \| PlugInstall --sync | source $MYVIMRC
                 \| endif
 augroup END
 
+" plugins repository
 let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
 
 call plug#begin(s:vimplug_repo)
@@ -103,9 +120,10 @@ nnoremap <C-t>tl :FriendsTwitter<CR>
 nnoremap <C-t>p :ProfileTwitter<CR>
 nnoremap <C-t>n :MentionsTwitter<CR>
 nnoremap <C-t>sw :SwitchLoginTwitter<CR>
-nnoremap <C-t>j :PosttoTwitter<CR>
-nnoremap <C-t>h :PreviousTwitter<CR>
-nnoremap <C-t>l :NextTwitter<CR>
+nnoremap <buffer><C-t>j :PosttoTwitter<CR>
+nnoremap <buffer><C-t>h :PreviousTwitter<CR>
+nnoremap <buffer><C-t>l :NextTwitter<CR>
+
 " configure the number of tweets returned by :FriendsTwitter
 let twitvim_count = 100
 " default browser
