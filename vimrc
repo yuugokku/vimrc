@@ -1,10 +1,13 @@
 set nocompatible
 scriptencoding utf-8
 set encoding=utf-8
+let g:is_win32_unix = has('win32unix')
+let g:is_win32 = has('win32')
 
 " ----------
-" key mapping
+" basic settings
 " ----------
+" key mapping -------------------------- {{{
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
@@ -23,14 +26,11 @@ nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
 
-
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
+" }}}
 
-let g:is_win32_unix = has('win32unix')
-let g:is_win32 = has('win32')
-
-" basic settings
+" basic settings ----------------------- {{{
 syntax enable
 filetype plugin indent on
 set number
@@ -52,27 +52,37 @@ set noswapfile nobackup noundofile
 set ambiwidth=double
 set termguicolors
 set wildmenu
+set statusline=%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
+" }}}
 
-" Auto commands specific to FileType
+" Auto commands specific to FileType ----------- {{{
+
+" vimscript
+augroup filetype_vim
+    autocmd! *
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
 
 " markdown
 augroup filetype_markdown
     autocmd! *
-    autocmd BufReadPre *.md setlocal wrap
-    autocmd BufReadPre *.md onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
-    autocmd BufReadPre *.md onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
+    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
 augroup END
 
 " python
 augroup filetype_python
     autocmd! *
-    autocmd BufReadPre *.py inoremap """<Tab> """<CR>"""<Esc>ko
+    autocmd FileType python inoremap """<Tab> """<CR>"""<Esc>ko
 augroup END
+" }}}
 
 " ----------
 " vim-plug settings
 " ----------
 
+" automatic installation of vim-plug ------------------ {{{
 " vim setting directory
 function! s:get_vimdir() abort
     if g:is_win32
@@ -97,6 +107,9 @@ augroup vimplug_startup
                 \| endif
 augroup END
 
+" }}}
+
+" plugins installation ------------------------- {{{
 " plugins repository
 let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
 
@@ -111,10 +124,12 @@ Plug 'vim-jp/vimdoc-ja'
 
 call plug#end()
 
+" }}}
+
 " ----------
-" plugin-related key mappings
+" plugin-related settings
 " ----------
-" twitvim
+" twitvim ----------------------------------------- {{{
 " Make sure some common commands about twitvim starts with <C-t>
 nnoremap <C-t>tl :FriendsTwitter<CR>
 nnoremap <C-t>p :ProfileTwitter<CR>
@@ -132,6 +147,7 @@ if g:is_win32
 else 
     let g:twitvim_browser_cmd = 'firefox'
 endif
+" }}}
 
 " rust.vim
 let g:rustfmt_autosave = 1
@@ -139,7 +155,7 @@ let g:rustfmt_autosave = 1
 " japanese document
 set helplang=ja,en
 
-" Fern.vim
+" Fern.vim ---------------------------------- {{{
 nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
 
 nmap <Leader>f :Fern -drawer .<CR>
@@ -170,9 +186,9 @@ augroup my-fern
 augroup END
 
 let g:fern#default_hidden=1
+" }}}
 
-
-" Coc.nvim installation and settings
+" Coc.nvim installation and settings -------------------- {{{
 let g:coc_global_extensions = [
             \'coc-rust-analyzer',
             \'coc-pyright',
@@ -186,4 +202,4 @@ if g:is_win32_unix
 else
     let g:coc_node_path = 'node'
 endif
-
+" }}}
