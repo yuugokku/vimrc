@@ -214,5 +214,6 @@ nmap <Leader>def <Plug>(coc-definition)
 
 " colorscheme: gruvbox -------------------{{{
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = 1
+set background=dark
+let g:gruvbox_contrast_dark = 'soft'
 " }}}
