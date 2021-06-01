@@ -38,6 +38,7 @@ set incsearch
 set hlsearch
 set cursorline
 if g:is_win32
+    " disable hard-to-see cursorline on cmd.exe
     set nocursorline
 endif
 set laststatus=2
@@ -53,6 +54,7 @@ set ambiwidth=double
 set termguicolors
 set wildmenu
 set statusline=%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
+set belloff=esc,error
 " }}}
 
 " Auto commands specific to FileType ----------- {{{
@@ -113,6 +115,7 @@ augroup END
 " plugins repository
 let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
 
+" installation
 call plug#begin(s:vimplug_repo)
 
 Plug 'junegunn/vim-plug'
@@ -120,6 +123,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'lambdalisue/fern.vim'
 Plug 'twitvim/twitvim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
 
 call plug#end()
@@ -202,4 +206,9 @@ if g:is_win32_unix
 else
     let g:coc_node_path = 'node'
 endif
+" }}}
+
+" colorscheme: gruvbox -------------------{{{
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 1
 " }}}
