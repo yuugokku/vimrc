@@ -42,7 +42,6 @@ set number
 set incsearch
 set hlsearch
 set cursorline
-set nocursorline
 set laststatus=2
 set hidden
 set updatetime=400
