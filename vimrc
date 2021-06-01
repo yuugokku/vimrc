@@ -76,7 +76,7 @@ augroup END
 " python
 augroup filetype_python
     autocmd! *
-    autocmd FileType python inoremap """<Tab> """<CR>"""<Esc>ko
+    autocmd FileType python inoremap <buffer>"""<Tab> """<CR>"""<Esc>ko
 augroup END
 " }}}
 
