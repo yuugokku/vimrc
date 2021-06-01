@@ -51,7 +51,6 @@ set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
 set history=2000
 set noswapfile nobackup noundofile
-set ambiwidth=double
 set termguicolors
 set wildmenu
 set statusline=*%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
