@@ -11,6 +11,9 @@ let g:is_win32 = has('win32')
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
+" useful for completion
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
 " surrounding
 nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
@@ -28,6 +31,8 @@ nnoremap -L 50<C-w>>
 
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
+
+nnoremap <C-n> :set nohlsearch<CR>
 " }}}
 
 " basic settings ----------------------- {{{
@@ -37,10 +42,7 @@ set number
 set incsearch
 set hlsearch
 set cursorline
-if g:is_win32
-    " disable hard-to-see cursorline on cmd.exe
-    set nocursorline
-endif
+set nocursorline
 set laststatus=2
 set hidden
 set updatetime=400
@@ -53,7 +55,7 @@ set noswapfile nobackup noundofile
 set ambiwidth=double
 set termguicolors
 set wildmenu
-set statusline=%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
+set statusline=*%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
 set belloff=esc,error
 " }}}
 
@@ -206,6 +208,9 @@ if g:is_win32_unix
 else
     let g:coc_node_path = 'node'
 endif
+
+nmap <Leader>def <Plug>(coc-definition)
+
 " }}}
 
 " colorscheme: gruvbox -------------------{{{
