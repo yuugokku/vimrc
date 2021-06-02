@@ -56,7 +56,8 @@ set cursorline
 set laststatus=2
 set hidden
 set updatetime=400
-set nobackup
+set number
+set relativenumber
 set nowritebackup
 set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
@@ -209,7 +210,8 @@ let g:coc_global_extensions = [
             \'coc-pyright',
             \'coc-html',
             \'coc-css',
-            \'coc-json'
+            \'coc-json',
+            \'coc-tsserver',
             \]
 
 if g:is_win32_unix
