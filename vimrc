@@ -8,6 +8,7 @@ let g:is_win32 = has('win32')
 " basic settings
 " ----------
 " key mapping -------------------------- {{{
+let mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
@@ -28,6 +29,16 @@ nnoremap -H 50<C-w><
 nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
+" jumping to windows
+nnoremap <Leader>h <C-w>h
+nnoremap <Leader>l <C-w>l
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>k <C-w>k
+" easily moving windows
+nnoremap <Leader>H <C-w>H
+nnoremap <Leader>L <C-w>L
+nnoremap <Leader>J <C-w>J
+nnoremap <Leader>K <C-w>K
 
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
