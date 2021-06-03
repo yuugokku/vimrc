@@ -37,7 +37,7 @@ nnoremap -H 50<C-w><
 nnoremap -J 10<C-w>+
 nnoremap -K 10<C-w>-
 nnoremap -L 50<C-w>>
-" jumping to windows
+" jumping across windows
 nnoremap <Leader>h <C-w>h
 nnoremap <Leader>l <C-w>l
 nnoremap <Leader>j <C-w>j
