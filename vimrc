@@ -50,14 +50,13 @@ nnoremap <C-n> :set nohlsearch<CR>
 syntax enable
 filetype plugin indent on
 set number
+set relativenumber
 set incsearch
 set hlsearch
 set cursorline
 set laststatus=2
 set hidden
 set updatetime=400
-set number
-set relativenumber
 set nowritebackup
 set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
