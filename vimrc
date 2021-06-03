@@ -22,12 +22,6 @@ inoremap <C-k> <Up>
 nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
-inoremap {<Tab> {<CR>}<Esc>ko
-inoremap {<CR> {<CR>}<Esc>ko
-inoremap [<Tab> [<CR>]<Esc>ko
-inoremap [<CR> [<CR>]<Esc>ko
-inoremap (<CR> (<CR>)<Esc>ko
-inoremap (<CR> (<CR>)<Esc>ko
 " nervous at splitting
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
@@ -85,6 +79,11 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
+augroup filetype_html
+    autocmd! *
+    autocmd FileType html inoremap <buffer></ </<Esc>:execute "normal! m`?<[a-zA-Z1-9]\\+\r:nohlsearch\rlyiw``pa>"<CR>a
+augroup END
+
 " markdown
 augroup filetype_markdown
     autocmd! *
@@ -97,6 +96,12 @@ augroup END
 augroup filetype_python
     autocmd! *
     autocmd FileType python inoremap <buffer>"""<Tab> """<CR>"""<Esc>ko
+    inoremap {<Tab> {<CR>}<Esc>ko
+    inoremap {<CR> {<CR>}<Esc>ko
+    inoremap [<Tab> [<CR>]<Esc>ko
+    inoremap [<CR> [<CR>]<Esc>ko
+    inoremap (<CR> (<CR>)<Esc>ko
+    inoremap (<CR> (<CR>)<Esc>ko
 augroup END
 " }}}
 
