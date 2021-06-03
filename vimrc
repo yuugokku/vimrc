@@ -12,6 +12,9 @@ let mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
+" select them
+nnoremap <C-a> ggVG
+vnoremap <C-a> <Esc>ggVG
 " useful for completion
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
@@ -20,6 +23,11 @@ nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
 inoremap {<Tab> {<CR>}<Esc>ko
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<Tab> [<CR>]<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
 " nervous at splitting
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
@@ -40,6 +48,7 @@ nnoremap <Leader>L <C-w>L
 nnoremap <Leader>J <C-w>J
 nnoremap <Leader>K <C-w>K
 
+" sometimes mistype a command
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 
