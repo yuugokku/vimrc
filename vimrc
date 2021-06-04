@@ -145,6 +145,7 @@ Plug 'lambdalisue/fern.vim'
 Plug 'twitvim/twitvim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
