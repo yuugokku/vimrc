@@ -70,6 +70,7 @@ set wildmenu
 set statusline=*%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
 set belloff=esc,error
 set clipboard=unnamedplus
+set backspace=indent,eol,nostop
 " }}}
 
 " Auto commands specific to FileType ----------- {{{
