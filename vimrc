@@ -117,7 +117,8 @@ let s:vimplug_dir = expand(s:get_vimdir() . '/autoload')
 let s:vimplug_target = expand(s:vimplug_dir . '/plug.vim')
 
 if empty(glob(s:vimplug_target))
-    silent execute '!curl -fLo ' . s:vimplug_target . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo ' . s:vimplug_target 
+                \. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
 augroup vimplug_startup
