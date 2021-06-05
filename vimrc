@@ -95,12 +95,6 @@ augroup END
 augroup filetype_python
     autocmd! *
     autocmd FileType python inoremap <buffer>"""<Tab> """<CR>"""<Esc>ko
-    inoremap {<Tab> {<CR>}<Esc>ko
-    inoremap {<CR> {<CR>}<Esc>ko
-    inoremap [<Tab> [<CR>]<Esc>ko
-    inoremap [<CR> [<CR>]<Esc>ko
-    inoremap (<CR> (<CR>)<Esc>ko
-    inoremap (<CR> (<CR>)<Esc>ko
 augroup END
 " }}}
 
