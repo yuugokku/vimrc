@@ -69,7 +69,7 @@ set termguicolors
 set wildmenu
 set statusline=*%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
 set belloff=esc,error
-set clipboard=unnamedplus
+set clipboard=unnamed
 " }}}
 
 " Auto commands specific to FileType ----------- {{{
@@ -86,6 +86,9 @@ augroup filetype_markdown
     autocmd FileType markdown setlocal wrap
     autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
     autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
+    " hyperlinking quickly
+    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
+    autocmd FileType markdown vnoremap <buffer><C-m> "kc[]()<Esc>h"kphi
 augroup END
 
 " python
