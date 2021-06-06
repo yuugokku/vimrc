@@ -1,6 +1,8 @@
-set nocompatible
-scriptencoding utf-8
+if &compatible
+    set nocompatible
+endif
 set encoding=utf-8
+scriptencoding utf-8
 let g:is_win32_unix = has('win32unix')
 let g:is_win32 = has('win32')
 
@@ -8,7 +10,7 @@ let g:is_win32 = has('win32')
 " basic settings
 " ----------
 " key mapping -------------------------- {{{
-let mapleader = " "
+let g:mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
@@ -47,6 +49,10 @@ cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 
 nnoremap <C-n> :set nohlsearch<CR>
+
+" detect whitespace
+nnoremap <Leader>w :match Error /\v +$/<CR>
+nnoremap <Leader>W :match none<CR>
 " }}}
 
 " basic settings ----------------------- {{{
@@ -89,7 +95,7 @@ augroup filetype_markdown
     autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
     " hyperlinking quickly
     autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
-    autocmd FileType markdown vnoremap <buffer><C-m> "kc[]()<Esc>h"kphi
+    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
 augroup END
 
 " python
