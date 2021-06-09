@@ -103,6 +103,11 @@ augroup filetype_python
     autocmd! *
     autocmd FileType python inoremap <buffer>"""<Tab> """<CR>"""<Esc>ko
 augroup END
+
+" javascript
+augroup filetype_javascript
+    autocmd! *
+    autocmd FileType javascript inoremap <buffer>{<CR> {}<Left><CR><Esc>O
 " }}}
 
 " ----------
