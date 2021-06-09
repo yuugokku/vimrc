@@ -62,7 +62,11 @@ set number
 set relativenumber
 set incsearch
 set hlsearch
-set cursorline
+if is_win32
+    set nocursorline
+else
+    set cursorline
+endif
 set laststatus=2
 set hidden
 set updatetime=400
