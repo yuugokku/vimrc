@@ -161,7 +161,8 @@ Plug 'twitvim/twitvim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
-Plug  'uguu-org/vim-matrix-screensaver'
+Plug 'uguu-org/vim-matrix-screensaver'
+Plug 'goerz/jupytext.vim'
 
 call plug#end()
 
@@ -253,4 +254,11 @@ nmap <Leader>def <Plug>(coc-definition)
 colorscheme gruvbox
 set background=dark
 let g:gruvbox_contrast_dark = 'soft'
+" }}}
+
+" jupytext.vim ------------------ {{{
+if is_win32
+    let g:jupytext_command = expand('~/anaconda3/Scripts/jupytext')
+endif
+let g:jupytext_fmt = 'py'
 " }}}
