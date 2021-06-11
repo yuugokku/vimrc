@@ -161,6 +161,7 @@ Plug 'twitvim/twitvim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
+Plug  'uguu-org/vim-matrix-screensaver'
 
 call plug#end()
 
