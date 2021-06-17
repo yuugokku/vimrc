@@ -163,6 +163,7 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
 Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'goerz/jupytext.vim'
+Plug 'yuugokku/yuugokku.vim'
 
 call plug#end()
 
