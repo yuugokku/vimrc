@@ -1,3 +1,4 @@
 plugins/
 autoload/
 test.vim
+.netrwhist

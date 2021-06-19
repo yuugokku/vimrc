@@ -54,6 +54,9 @@ nnoremap <C-n> :set nohlsearch<CR>
 " detect whitespace
 nnoremap <Leader>w :match Error /\v +$/<CR>
 nnoremap <Leader>W :match none<CR>
+
+" terminal mode
+tnoremap <Leader> <C-w>
 " }}}
 
 " basic settings ----------------------- {{{
