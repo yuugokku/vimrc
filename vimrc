@@ -24,6 +24,7 @@ inoremap <C-k> <Up>
 nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
 nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
 nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
+nnoremap <Leader>{ viw<Esc>a}<Esc>bi{<Esc>el
 " nervous at splitting
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
