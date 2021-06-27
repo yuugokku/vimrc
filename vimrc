@@ -81,7 +81,7 @@ set history=2000
 set noswapfile nobackup noundofile
 set termguicolors
 set wildmenu
-set statusline=*%f\ %m\ -\ FileType:\ %y\ %=%l/%L\ Lines
+set statusline=*%f\ %m\ -\ FileType:\ %y\ %=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,nostop
 set clipboard=unnamed
@@ -209,6 +209,7 @@ nmap <Leader>f :Fern -drawer .<CR>
 
 function! s:set_fernkeys() abort
     nmap <buffer>fo <Plug>(fern-action-open:vsplit)
+    nmap <buffer>ft <Plug>(fern-action-open:tabedit)
     nmap <buffer>fn <Plug>(fern-action-new-file)<Plug>(fern-action-reload)
     nmap <buffer>fd <Plug>(fern-action-new-dir)<Plug>(fern-action-reload)
     nmap <buffer>fc <Plug>(fern-action-copy)<Plug>(fern-action-reload)
