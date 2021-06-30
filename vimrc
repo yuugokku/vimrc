@@ -56,7 +56,7 @@ nnoremap <Leader>w :match Error /\v +$/<CR>
 nnoremap <Leader>W :match none<CR>
 
 " terminal mode
-tnoremap <Leader> <C-w>
+" tnoremap <Leader> <C-w>
 " }}}
 
 " basic settings ----------------------- {{{
@@ -168,6 +168,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'goerz/jupytext.vim'
 Plug 'yuugokku/yuugokku.vim'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 call plug#end()
 
@@ -205,13 +207,13 @@ set helplang=ja,en
 " Fern.vim ---------------------------------- {{{
 nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
 
-nmap <Leader>f :Fern -drawer .<CR>
+nnoremap <Leader>f :Fern . -drawer -stay<CR>
 
-function! s:set_fernkeys() abort
+function! s:setFernKeys() abort
     nmap <buffer>fo <Plug>(fern-action-open:vsplit)
     nmap <buffer>ft <Plug>(fern-action-open:tabedit)
     nmap <buffer>fn <Plug>(fern-action-new-file)<Plug>(fern-action-reload)
-    nmap <buffer>fd <Plug>(fern-action-new-dir)<Plug>(fern-action-reload)
+    nmap <buffer>fdir <Plug>(fern-action-new-dir)<Plug>(fern-action-reload)
     nmap <buffer>fc <Plug>(fern-action-copy)<Plug>(fern-action-reload)
     nmap <buffer>fm <Plug>(fern-action-move)<Plug>(fern-action-reload)
     nmap <buffer>fdel <Plug>(fern-action-trash)<Plug>(fern-action-reload)
@@ -230,10 +232,11 @@ endfunction
 
 augroup my-fern
     autocmd! *
-    autocmd FileType fern call s:set_fernkeys()
+    autocmd FileType fern call s:setFernKeys()
 augroup END
 
-let g:fern#default_hidden=1
+let g:fern#default_hidden = 1
+let g:fern#disable_drawer_smart = 1
 " }}}
 
 " Coc.nvim installation and settings -------------------- {{{
