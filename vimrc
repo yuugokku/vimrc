@@ -14,6 +14,7 @@ let g:mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
+vnoremap jk <ESC>
 " select them
 nnoremap <C-a> ggVG
 vnoremap <C-a> <Esc>ggVG
@@ -45,18 +46,26 @@ nnoremap <Leader>L <C-w>L
 nnoremap <Leader>J <C-w>J
 nnoremap <Leader>K <C-w>K
 
+" quick saving
+nnoremap <Leader><Leader> :wa<CR>
+
 " sometimes mistype a command
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 
 nnoremap <C-n> :set nohlsearch<CR>
 
+onoremap ( [(
+onoremap ) ])
+vnoremap ( [(
+vnoremap ) ])
+
 " detect whitespace
 nnoremap <Leader>w :match Error /\v +$/<CR>
 nnoremap <Leader>W :match none<CR>
 
 " terminal mode
-" tnoremap <Leader> <C-w>
+tnoremap <Leader><Leader> <C-w>
 " }}}
 
 " basic settings ----------------------- {{{
@@ -89,6 +98,22 @@ set clipboard=unnamed
 
 " Auto commands specific to FileType ----------- {{{
 
+function! s:setMarkdown() abort
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
+    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
+    " hyperlinking quickly
+    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
+    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
+endfunction
+
+" detect txt file as markdown
+augroup filetype_txt
+    autocmd! *
+    autocmd FileType text call s:setMarkdown()
+    autocmd FileType text setlocal filetype=markdown
+augroup END
+
 " vimscript
 augroup filetype_vim
     autocmd! *
@@ -98,12 +123,7 @@ augroup END
 " markdown
 augroup filetype_markdown
     autocmd! *
-    autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
-    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
-    " hyperlinking quickly
-    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
-    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
+    autocmd FileType text call s:setMarkdown()
 augroup END
 
 " python
@@ -116,6 +136,12 @@ augroup END
 augroup filetype_javascript
     autocmd! *
     autocmd FileType javascript inoremap <buffer>{<CR> {}<Left><CR><Esc>O
+augroup END
+
+" rust
+augroup filetype_rust
+    autocmd! *
+    autocmd FileType rust inoremap <buffer>{<CR> {}<Left><CR><Esc>O
 " }}}
 
 " ----------
@@ -207,7 +233,7 @@ set helplang=ja,en
 " Fern.vim ---------------------------------- {{{
 nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
 
-nnoremap <Leader>f :Fern . -drawer -stay<CR>
+nnoremap <Leader>f :Fern . -drawer<CR>
 
 function! s:setFernKeys() abort
     nmap <buffer>fo <Plug>(fern-action-open:vsplit)
