@@ -1,6 +1,8 @@
 if &compatible
     set nocompatible
 endif
+set t_u7=
+set t_RV=
 set encoding=utf-8
 scriptencoding utf-8
 let g:is_win32_unix = has('win32unix')
