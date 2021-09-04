@@ -96,6 +96,9 @@ set statusline=*%f\ %m\ -\ FileType:\ %y\ %=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,nostop
 set clipboard=unnamed
+if has('python3/dyn')
+    set pythonthreedll=python39
+endif
 " }}}
 
 " Auto commands specific to FileType ----------- {{{
@@ -218,12 +221,6 @@ nnoremap <buffer><C-t>l :NextTwitter<CR>
 
 " configure the number of tweets returned by :FriendsTwitter
 let twitvim_count = 100
-" default browser
-if g:is_win32
-    let g:twitvim_browser_cmd = ''
-else 
-    let g:twitvim_browser_cmd = 'firefox'
-endif
 " }}}
 
 " rust.vim
