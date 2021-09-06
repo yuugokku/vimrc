@@ -16,7 +16,6 @@ let g:mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
 " awesome mode changing
 inoremap jk <ESC>
-vnoremap jk <ESC>
 " select them
 nnoremap <C-a> ggVG
 vnoremap <C-a> <Esc>ggVG
@@ -199,8 +198,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'goerz/jupytext.vim'
 Plug 'yuugokku/yuugokku.vim'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+if executable('pdflatex')
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+endif
 
 call plug#end()
 
@@ -255,7 +256,7 @@ function! s:setFernKeys() abort
     nnoremap <buffer> -L 50<C-w>>
 endfunction
 
-augroup my-fern
+augroup my_fern
     autocmd! *
     autocmd FileType fern call s:setFernKeys()
 augroup END
