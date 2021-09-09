@@ -133,7 +133,6 @@ augroup END
 " python
 augroup filetype_python
     autocmd! *
-    autocmd FileType python inoremap <buffer>"""<Tab> """<CR>"""<Esc>ko
 augroup END
 
 " javascript
