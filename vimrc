@@ -73,7 +73,7 @@ tnoremap <Leader><Leader> <C-w>
 syntax enable
 filetype plugin indent on
 set number
-set relativenumber
+" set relativenumber
 set incsearch
 set hlsearch
 if is_win32
@@ -280,7 +280,7 @@ else
     let g:coc_node_path = 'node'
 endif
 
-nmap <Leader>def <Plug>(coc-definition)
+nmap <Leader>d <Plug>(coc-definition)
 
 " }}}
 
