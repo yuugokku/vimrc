@@ -91,7 +91,9 @@ set history=2000
 set noswapfile nobackup noundofile
 set termguicolors
 set wildmenu
-set statusline=*%f\ %m\ -\ FileType:\ %y\ %=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
+set statusline=%{coc#status()}
+set statusline+=*%f\ %m\ -\ FileType:\ %y\
+set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,nostop
 set clipboard=unnamed
@@ -273,6 +275,8 @@ let g:coc_global_extensions = [
             \'coc-json',
             \'coc-tsserver',
             \]
+let g:coc_snippet_next = "<C-l>"
+let g:co_snippet_prev = "<C-h>"
 
 if g:is_win32_unix
     let g:coc_node_path = expand('/c/nodejs/node.exe')
@@ -280,7 +284,26 @@ else
     let g:coc_node_path = 'node'
 endif
 
+" jumping
 nmap <Leader>d <Plug>(coc-definition)
+nmap <Leader>> <Plug>(coc-diagnostic-next)
+nmap <Leader>< <Plug>(coc-diagnostic-prev)
+
+" useful mappings
+nmap crn <Plug>(coc-rename)
+
+" text-obj
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+
 
 " }}}
 
