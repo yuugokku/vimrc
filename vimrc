@@ -92,7 +92,7 @@ set noswapfile nobackup noundofile
 set termguicolors
 set wildmenu
 set statusline=%{coc#status()}
-set statusline+=*%f\ %m\ -\ FileType:\ %y\
+set statusline+=\ %f\ %m\ -\ FileType:\ %y
 set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,nostop
