@@ -91,8 +91,7 @@ set history=2000
 set noswapfile nobackup noundofile
 set termguicolors
 set wildmenu
-set statusline=%{coc#status()}
-set statusline+=\ %f\ %m\ -\ FileType:\ %y
+set statusline+=;\ %f\ %m\ -\ FileType:\ %y
 set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
 set belloff=esc,error
 set backspace=indent,eol,nostop
@@ -192,17 +191,10 @@ Plug 'junegunn/vim-plug'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'lambdalisue/fern.vim'
-Plug 'twitvim/twitvim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
-Plug 'uguu-org/vim-matrix-screensaver'
-Plug 'goerz/jupytext.vim'
 Plug 'yuugokku/yuugokku.vim'
-if executable('pdflatex')
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-endif
 
 call plug#end()
 
@@ -211,22 +203,6 @@ call plug#end()
 " ----------
 " plugin-related settings
 " ----------
-" twitvim ----------------------------------------- {{{
-" Make sure some common commands about twitvim starts with <C-t>
-nnoremap <C-t>tl :FriendsTwitter<CR>
-nnoremap <C-t>p :ProfileTwitter<CR>
-nnoremap <C-t>n :MentionsTwitter<CR>
-nnoremap <C-t>sw :SwitchLoginTwitter<CR>
-nnoremap <buffer><C-t>j :PosttoTwitter<CR>
-nnoremap <buffer><C-t>h :PreviousTwitter<CR>
-nnoremap <buffer><C-t>l :NextTwitter<CR>
-
-" configure the number of tweets returned by :FriendsTwitter
-let twitvim_count = 100
-" }}}
-
-" rust.vim
-let g:rustfmt_autosave = 1
 
 " japanese document
 set helplang=ja,en
@@ -303,7 +279,21 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+" status line
 
+function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info',  {})
+    if empty(info) | return '' | endif
+    let msgs = ''
+    if get(info, 'error', 0)
+        let msgs = msgs . 'Error: ' . info['error'] . ' '
+    endif
+    if get(info, 'warning', 0)
+        let msgs = msgs . 'Warning: ' . info['warning'] . ' '
+    endif
+    return msgs
+endfunction
+set statusline^=%{StatusDiagnostic()}
 
 " }}}
 
@@ -311,11 +301,4 @@ omap ac <Plug>(coc-classobj-a)
 colorscheme gruvbox
 set background=dark
 let g:gruvbox_contrast_dark = 'soft'
-" }}}
-
-" jupytext.vim ------------------ {{{
-if is_win32
-    let g:jupytext_command = expand('~/anaconda3/Scripts/jupytext')
-endif
-let g:jupytext_fmt = 'py'
 " }}}
