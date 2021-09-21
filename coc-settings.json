@@ -1,5 +1,5 @@
 {
-    "tsserver.enableJavascript": false
+    "tsserver.enableJavascript": false,
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
 		"variable": "\ue79b",

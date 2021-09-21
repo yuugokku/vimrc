@@ -19,14 +19,6 @@ inoremap jk <ESC>
 " select them
 nnoremap <C-a> ggVG
 vnoremap <C-a> <Esc>ggVG
-" useful for completion
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-" surrounding
-nnoremap <Leader>" viw<Esc>a"<Esc>bi"<Esc>el
-nnoremap <Leader>' viw<Esc>a'<Esc>bi'<Esc>el
-nnoremap <Leader>( viw<Esc>a)<Esc>bi(<Esc>el
-nnoremap <Leader>{ viw<Esc>a}<Esc>bi{<Esc>el
 " nervous at splitting
 nnoremap -h <C-w><
 nnoremap -j <C-w>+
