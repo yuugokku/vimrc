@@ -1,6 +1,7 @@
 if &compatible
     set nocompatible
 endif
+
 set t_u7=
 set t_RV=
 set encoding=utf-8
@@ -73,6 +74,11 @@ if is_win32
 else
     set cursorline
 endif
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 set laststatus=2
 set hidden
 set updatetime=400
@@ -81,7 +87,6 @@ set shiftwidth=4 tabstop=4 expandtab autoindent
 set nowrap
 set history=2000
 set noswapfile nobackup noundofile
-set termguicolors
 set wildmenu
 set statusline+=;\ %f\ %m\ -\ FileType:\ %y
 set statusline+=%=Buffer:\ %n\ -\ %l/%L\ Lines\ %v
@@ -292,5 +297,4 @@ set statusline^=%{StatusDiagnostic()}
 " colorscheme: gruvbox -------------------{{{
 colorscheme gruvbox
 set background=dark
-let g:gruvbox_contrast_dark = 'soft'
 " }}}
