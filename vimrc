@@ -147,6 +147,18 @@ augroup filetype_rust
 " }}}
 
 " ----------
+" user-commands
+" ----------
+
+function s:convertToUTF8(encoding) abort
+    execute 'e ++encoding=' . a:encoding
+    execute 'set fileencoding=utf-8'
+    execute 'write'
+endfunction
+
+command! -nargs=1 ConvertToUTF8 call s:convertToUTF8("<args>")
+
+" ----------
 " vim-plug settings
 " ----------
 
