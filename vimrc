@@ -44,11 +44,7 @@ nnoremap <Leader>K <C-w>K
 " quick saving
 nnoremap <Leader><Leader> :wa<CR>
 
-" sometimes mistype a command
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-
-nnoremap <C-n> :set nohlsearch<CR>
+nnoremap <C-n> :nohlsearch<CR>
 
 onoremap ( [(
 onoremap ) ])
@@ -67,7 +63,7 @@ tnoremap <Leader><Leader> <C-w>
 syntax enable
 filetype plugin indent on
 set number
-" set relativenumber
+set relativenumber
 set incsearch
 set hlsearch
 if is_win32
@@ -97,6 +93,11 @@ set clipboard=unnamed
 if has('python3/dyn')
     set pythonthreedll=python39
 endif
+
+
+" macros
+let @n = 'gqip}j'
+let @o = 'ojgqip{dd}j'
 " }}}
 
 " Auto commands specific to FileType ----------- {{{
