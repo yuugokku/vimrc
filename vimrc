@@ -99,18 +99,6 @@ endif
 let @n = 'gqip}j'
 let @o = 'ojgqip{dd}j'
 " }}}
-
-" Auto commands specific to FileType ----------- {{{
-
-function! s:setMarkdown() abort
-    autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
-    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
-    " hyperlinking quickly
-    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
-    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
-endfunction
-
 " detect txt file as markdown
 augroup filetype_txt
     autocmd! *
@@ -127,7 +115,11 @@ augroup END
 " markdown
 augroup filetype_markdown
     autocmd! *
-    autocmd FileType text call s:setMarkdown()
+    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
+    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
+    " hyperlinking quickly
+    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
+    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
 augroup END
 
 " python
