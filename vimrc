@@ -99,10 +99,11 @@ endif
 let @n = 'gqip}j'
 let @o = 'ojgqip{dd}j'
 " }}}
+
+" file specific settings -----------------{{{
 " detect txt file as markdown
 augroup filetype_txt
     autocmd! *
-    autocmd FileType text call s:setMarkdown()
     autocmd FileType text setlocal filetype=markdown
 augroup END
 
@@ -141,7 +142,7 @@ augroup filetype_rust
 
 " ----------
 " user-commands
-" ----------
+" ---------- {{{
 
 function s:convertToUTF8(encoding) abort
     execute 'e ++encoding=' . a:encoding
@@ -150,6 +151,7 @@ function s:convertToUTF8(encoding) abort
 endfunction
 
 command! -nargs=1 ConvertToUTF8 call s:convertToUTF8("<args>")
+" }}}
 
 " ----------
 " vim-plug settings
@@ -199,6 +201,8 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
 Plug 'yuugokku/yuugokku.vim'
 Plug 'jamespeapen/Nvim-R'
+Plug 'mattn/vim-maketable'
+Plug 'thinca/vim-quickrun'
 
 call plug#end()
 
