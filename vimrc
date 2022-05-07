@@ -203,6 +203,8 @@ Plug 'yuugokku/yuugokku.vim'
 Plug 'jamespeapen/Nvim-R'
 Plug 'mattn/vim-maketable'
 Plug 'thinca/vim-quickrun'
+Plug 'pangloss/vim-javascript'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -221,12 +223,19 @@ nmap <Plug>(fern-action-reload) <Plug>(fern-action-reload:all)
 nnoremap <Leader>f :Fern . -drawer<CR>
 
 function! s:setFernKeys() abort
+    " Open the file
     nmap <buffer>fo <Plug>(fern-action-open:vsplit)
+    nmap <buffer>fs <Plug>(fern-action-open:split)
     nmap <buffer>ft <Plug>(fern-action-open:tabedit)
+    " Create a file
     nmap <buffer>fn <Plug>(fern-action-new-file)<Plug>(fern-action-reload)
+    " Create a directory
     nmap <buffer>fdir <Plug>(fern-action-new-dir)<Plug>(fern-action-reload)
+    " Copy
     nmap <buffer>fc <Plug>(fern-action-copy)<Plug>(fern-action-reload)
+    " Move
     nmap <buffer>fm <Plug>(fern-action-move)<Plug>(fern-action-reload)
+    " Delete
     nmap <buffer>fdel <Plug>(fern-action-trash)<Plug>(fern-action-reload)
     nmap <buffer>frn <Plug>(fern-action-rename)<Plug>(fern-action-reload)
     nmap <buffer>frl <Plug>(fern-action-reload)
@@ -308,4 +317,9 @@ set statusline^=%{StatusDiagnostic()}
 " colorscheme: gruvbox -------------------{{{
 colorscheme gruvbox
 set background=dark
+" }}}
+
+
+" vim-javas cript -------------------------{{{
+
 " }}}
