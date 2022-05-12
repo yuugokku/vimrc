@@ -138,6 +138,7 @@ augroup END
 augroup filetype_rust
     autocmd! *
     autocmd FileType rust inoremap <buffer>{<CR> {}<Left><CR><Esc>O
+augroup END
 " }}}
 
 " ----------
@@ -205,6 +206,7 @@ Plug 'mattn/vim-maketable'
 Plug 'thinca/vim-quickrun'
 Plug 'pangloss/vim-javascript'
 Plug 'vimwiki/vimwiki'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
@@ -314,12 +316,10 @@ set statusline^=%{StatusDiagnostic()}
 
 " }}}
 
-" colorscheme: gruvbox -------------------{{{
-colorscheme gruvbox
-set background=dark
-" }}}
-
-
-" vim-javas cript -------------------------{{{
-
+" colorscheme: gruvbox, molokai -------------------{{{
+"colorscheme gruvbox
+"set background=dark
+if !empty(s:vimplug_repo . '/molokai')
+    colorscheme molokai
+endif
 " }}}
