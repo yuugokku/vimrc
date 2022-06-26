@@ -113,16 +113,6 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" markdown
-augroup filetype_markdown
-    autocmd! *
-    autocmd FileType markdown onoremap <buffer>ih :<C-u>execute "normal! ?^#\\+\r:nohlsearch\rwvg_"<CR>
-    autocmd FileType markdown onoremap <buffer>ah :<C-u>execute "normal! ?^#\\+\r:nohlsearch\r0vg_"<CR>
-    " hyperlinking quickly
-    autocmd FileType markdown vnoremap <buffer><C-l> "kc[]()<Esc>hhh"kpf(a
-    autocmd FileType markdown vnoremap <buffer><C-p> "kc[]()<Esc>h"kpF[a
-augroup END
-
 " python
 augroup filetype_python
     autocmd! *
@@ -201,12 +191,15 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'tpope/vim-fugitive'
 Plug 'yuugokku/yuugokku.vim'
-Plug 'jamespeapen/Nvim-R'
+Plug 'jalvesaq/Nvim-R'
 Plug 'mattn/vim-maketable'
 Plug 'thinca/vim-quickrun'
 Plug 'pangloss/vim-javascript'
 Plug 'vimwiki/vimwiki'
 Plug 'tomasr/molokai'
+Plug 'eigenfoo/stan-vim'
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 
 call plug#end()
 
@@ -322,4 +315,62 @@ set statusline^=%{StatusDiagnostic()}
 if !empty(s:vimplug_repo . '/molokai')
     colorscheme molokai
 endif
+" }}}
+
+" Nvim-R --------------------------------------------{{{
+let R_auto_start = 1
+let R_assign = 0
+
+" }}}
+
+" vim-slime / vim-ipython-cell ----------------------------------{{{
+
+" Send to vimterminal
+let g:slime_target = "vimterminal"
+
+" default shell
+let g:myshell = &shell
+
+" Define cell delimiter
+let g:slime_cell_delimiter = "# %%"
+let g:ipython_bufnr = 0
+
+" Setting up IPython window
+function! s:setIPython() abort
+    echom 'Launching IPython'
+    let g:ipython_bufnr = term_start(g:myshell, {"vertical": 1})
+    let g:slime_default_config = {"bufnr": g:ipython_bufnr}
+    let g:slime_dont_ask_default = 1
+    SlimeSend1 ipython --matplotlib
+endfunction
+
+function! s:quitIPython() abort
+    if g:ipython_bufnr == 0
+        echom 'Not yet started IPython'
+        return
+    endif
+    echom 'Quitting IPython'
+    call term_sendkeys(g:ipython_bufnr, "quit()\n")
+    call term_wait(g:ipython_bufnr)
+    call term_sendkeys(g:ipython_bufnr, "exit\r\n")
+    let g:ipython_bufnr = 0
+endfunction
+
+augroup ipython_setup
+    autocmd! *
+    autocmd FileType python let localleader = "\\"
+    autocmd FileType python nnoremap <buffer><localleader>rf :<c-u>call <SID>setIPython()<CR>
+    autocmd FileType python nnoremap <buffer><localleader>rq :<c-u>call <SID>quitIPython()<CR>
+
+    let g:slime_no_mappings = 1
+    autocmd FileType python nnoremap <buffer><Plug>IPythonSendCR :<c-u>call term_sendkeys(g:ipython_bufnr, "\n")<CR>
+    autocmd FileType python nnoremap <buffer><Plug>IPythonNextParagraph :<c-u>execute 'normal! }'<CR>
+    autocmd FileType python nnoremap <buffer><Plug>IPythonNextLine :<c-u>execute 'normal! j'<CR>
+    autocmd FileType python nnoremap <buffer><Plug>IPythonNextCell :<c-u>execute "normal! /^" . g:slime_cell_delimiter . "\r:nohlsearch\r"<CR>j
+
+    autocmd FileType python nmap <buffer><c-c><c-p> <Plug>SlimeParagraphSend<Plug>IPythonSendCR<Plug>IPythonNextParagraph
+    autocmd FileType python nmap <buffer><c-c><c-l> <Plug>SlimeLineSend<Plug>IPythonSendCR<Plug>IPythonNextLine
+    autocmd FileType python nmap <buffer><c-c><c-c> <Plug>SlimeSendCell<Plug>IPythonSendCR<Plug>IPythonNextCell
+augroup END
+
 " }}}
