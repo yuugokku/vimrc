@@ -1,3 +1,7 @@
+" ----------
+" basic settings
+" ----------
+" platform and encoding -------------------------{{{
 if &compatible
     set nocompatible
 endif
@@ -9,10 +13,7 @@ set termencoding=utf-8
 scriptencoding utf-8
 let g:is_win32_unix = has('win32unix')
 let g:is_win32 = has('win32')
-
-" ----------
-" basic settings
-" ----------
+" }}}
 " key mapping -------------------------- {{{
 let g:mapleader = " "
 nnoremap <Leader>v :vs $MYVIMRC<CR>
@@ -57,6 +58,7 @@ nnoremap <Leader>W :match none<CR>
 
 " terminal mode
 tnoremap <Leader><Leader> <C-w>
+tnoremap <c-k> <c-w>N
 " }}}
 
 " basic settings ----------------------- {{{
@@ -184,7 +186,8 @@ let s:vimplug_repo = expand(s:get_vimdir() . '/plugins')
 call plug#begin(s:vimplug_repo)
 
 Plug 'junegunn/vim-plug'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 Plug 'rust-lang/rust.vim'
 Plug 'lambdalisue/fern.vim'
 Plug 'morhetz/gruvbox'
@@ -200,6 +203,7 @@ Plug 'tomasr/molokai'
 Plug 'eigenfoo/stan-vim'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'ajpaulson/julia-syntax.vim'
 
 call plug#end()
 
@@ -252,61 +256,6 @@ augroup END
 
 let g:fern#default_hidden = 1
 let g:fern#disable_drawer_smart = 1
-" }}}
-
-" Coc.nvim installation and settings -------------------- {{{
-let g:coc_global_extensions = [
-            \'coc-rust-analyzer',
-            \'coc-pyright',
-            \'coc-html',
-            \'coc-css',
-            \'coc-json',
-            \'coc-tsserver',
-            \]
-let g:coc_snippet_next = "<C-l>"
-let g:co_snippet_prev = "<C-h>"
-
-if g:is_win32_unix
-    let g:coc_node_path = expand('/c/nodejs/node.exe')
-else
-    let g:coc_node_path = 'node'
-endif
-
-" jumping
-nmap <Leader>d <Plug>(coc-definition)
-nmap <Leader>> <Plug>(coc-diagnostic-next)
-nmap <Leader>< <Plug>(coc-diagnostic-prev)
-
-" useful mappings
-nmap crn <Plug>(coc-rename)
-
-" text-obj
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" status line
-
-function! StatusDiagnostic() abort
-    let info = get(b:, 'coc_diagnostic_info',  {})
-    if empty(info) | return '' | endif
-    let msgs = ''
-    if get(info, 'error', 0)
-        let msgs = msgs . 'Error: ' . info['error'] . ' '
-    endif
-    if get(info, 'warning', 0)
-        let msgs = msgs . 'Warning: ' . info['warning'] . ' '
-    endif
-    return msgs
-endfunction
-set statusline^=%{StatusDiagnostic()}
-
 " }}}
 
 " colorscheme: gruvbox, molokai -------------------{{{
